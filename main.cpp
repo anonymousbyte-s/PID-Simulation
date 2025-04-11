@@ -70,8 +70,7 @@ class PID {
 		// intigrate the error
 		iError += error * deltaTime;
 		// calculate the output
-		double output =
-		    error * Kp + iError * Ki + (error - lastError) / deltaTime * Kd;
+		double output = error * Kp + iError * Ki + (error - lastError) / deltaTime * Kd;
 		// update the lastError variable for the next loop
 		lastError = error;
 		return (output);
@@ -83,7 +82,7 @@ int main() {
 	PID dronePid(kP, kI, kD);
 	// do this until the escape key is pressed
 	while (GetKeyState(27) >= 0) {
-		// calculate the delta time
+		// calculate the delta time in seconds
 		double deltaTime = 1.0 / (clock() - prevTime);
 		// store the current time for calculating the delta time
 		prevTime = clock();
@@ -106,9 +105,8 @@ int main() {
 			drone.y = 0;
 		}
 		// print out the data
-		std::cout << std::setprecision(4) << "Throttle " << throttle
-		          << "\t Altitude " << drone.y << "\ttargetAltitude "
-		          << targetAltitude << "\n";
+		std::cout << std::setprecision(4) << "Throttle " << throttle << "\t Altitude " << drone.y << "\ttargetAltitude " << targetAltitude << "\n";
+		
 		// pause the loop when P is pressed
 		while (GetKeyState('P') < 0) {
 			prevTime = clock();
